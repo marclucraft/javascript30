@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="County or Country">
+    <ul class="suggestions">
+      <li>Filter for County</li>
+      <li>or Country</li>
+    </ul>
+  </form>
+  <script>
+    const endpoint = 'https://gist.githubusercontent.com/nickhough/2db4a427ed1e785984dc/raw/6a0d86bd1f2612bcce3ef92bdab3ee84af83178e/uk-counties.json'
+
+    let counties = []
+
+    fetch(endpoint)
+      .then(fetched => fetched.json())
+      .then(data => counties.push(...data))
+
+    const findMatch = (wordToMatch, counties) => {
+      return counties.filter(county => {
+        const regex = new RegExp(wordToMatch, 'gi')
+        return county.name.match(regex) || county.country.match(regex)
+      })
+    }
+
+    const displayMatches = (e) => {
+      const matches = findMatch(e.target.value, counties)
+      const html = matches.map(match => {
+        return `
+        <li>
+          <span class="name">${match.name}, ${match.country}</span>
+          <span class="abbreviation">${match.abbreviation}</span>
+        </li>
+        `
+      }).join('')
+      suggestions.innerHTML = html
+    }
+
+    const searchBox = document.querySelector('.search')
+    const suggestions = document.querySelector('.suggestions')
+
+    searchBox.addEventListener('keyup', displayMatches)
+
+  </script>
+</body>
+
+</html>
