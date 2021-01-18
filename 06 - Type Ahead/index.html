@@ -35,9 +35,12 @@
     const displayMatches = (e) => {
       const matches = findMatch(e.target.value, counties)
       const html = matches.map(match => {
+        const regex = new RegExp(e.target.value, 'gi')
+        const countyHighlight = match.name.replace(regex, `<span class="hl">${e.target.value}</span>`) 
+        const countryHighlight = match.name.replace(regex, `<span class="hl">${e.target.value}</span>`) 
         return `
         <li>
-          <span class="name">${match.name}, ${match.country}</span>
+          <span class="name">${countyHighlight}, ${countryHighlight}</span>
           <span class="abbreviation">${match.abbreviation}</span>
         </li>
         `
