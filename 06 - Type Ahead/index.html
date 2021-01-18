@@ -37,7 +37,7 @@
       const html = matches.map(match => {
         const regex = new RegExp(e.target.value, 'gi')
         const countyHighlight = match.name.replace(regex, `<span class="hl">${e.target.value}</span>`) 
-        const countryHighlight = match.name.replace(regex, `<span class="hl">${e.target.value}</span>`) 
+        const countryHighlight = match.country.replace(regex, `<span class="hl">${e.target.value}</span>`) 
         return `
         <li>
           <span class="name">${countyHighlight}, ${countryHighlight}</span>
