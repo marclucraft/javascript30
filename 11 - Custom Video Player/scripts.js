@@ -27,9 +27,7 @@ function scrub(e) {
   video.currentTime = (e.offsetX / progress.offsetWidth) * video.duration;
 }
 
-window.addEventListener('keydown', (e) => {
-  e.code === 'Space' ? togglePlay() : '';
-})
+window.addEventListener('keydown', (e) => e.code === 'Space' ? togglePlay() : '')
 
 video.addEventListener('click', togglePlay);
 video.addEventListener('play', updateButton);
