@@ -96,9 +96,9 @@
     }
 
     function toggleDone(e) {
-      if (!e.target.matches('input')) return; // only on inputs
-      const index = e.target.dataset.index;
-      items[index].done = !items[index].done;
+      if (!e.target.matches('input')) return; // only run on inputs
+      const i = e.target.dataset.index;
+      items[i].done = !items[i].done;
       refreshList();
     }
 
@@ -106,7 +106,6 @@
     itemsList.addEventListener('click', toggleDone);
 
     populateList(items, itemsList);
-
   </script>
 
 
